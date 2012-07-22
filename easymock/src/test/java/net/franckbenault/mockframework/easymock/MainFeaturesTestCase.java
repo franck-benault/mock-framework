@@ -78,4 +78,33 @@ public class MainFeaturesTestCase {
 
 	}
 
+	/*
+	 * feature3 of mock framework
+	 * counting invocation
+	 */
+	@Test
+	public void feature3_countingInvocationTest() {
+		//create mock
+		@SuppressWarnings("rawtypes")
+		List mockList = createNiceMock(List.class);
+		 
+		//expectation
+		expect(mockList.get(0)).andReturn("val").times(1,3);
+		
+		//replay mode
+		//possible replayAll()
+		replay(mockList);
+		 
+		//business test
+		assertEquals(mockList.get(0),"val");
+		assertEquals(mockList.get(0),"val");
+		assertEquals(mockList.get(0),"val");
+		//I expect that get(0) is called maximum three times
+		//assertEquals(mockList.get(0),"val");
+
+		//verify
+		//possible verifyAll();
+		verify(mockList);
+	}
+	
 }
