@@ -1,4 +1,4 @@
-package net.franckbenault.mockframework.easymock;
+package net.franckbenault.mockframework.mockito;
 
 import static org.junit.Assert.*;
 
@@ -10,10 +10,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static org.easymock.EasyMock.expect;
-import static org.easymock.EasyMock.createNiceMock;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class MainFeaturesTestCase {
 
@@ -41,21 +39,16 @@ public class MainFeaturesTestCase {
 	public void feature1_returninValueTest() {
 		//create mock
 		@SuppressWarnings("rawtypes")
-		List mockList = createNiceMock(List.class);
+		List mockList = mock(List.class);
 		 
 		//expectation
-		expect(mockList.get(0)).andStubReturn("one");
+		when(mockList.get(0)).thenReturn("one");
 		
-		//replay mode
-		//possible replayAll()
-		replay(mockList);
-		 
+
 		//business test
 		assertEquals(mockList.get(0),"one");
 
-		//verify
-		//possible verifyAll();
-		verify(mockList);
+
 	}
 	
 	/*
@@ -66,14 +59,12 @@ public class MainFeaturesTestCase {
 	public void feature2_throwingExceptionTest() {
 		//create mock
 		@SuppressWarnings("rawtypes")
-		List mockList = createNiceMock(List.class);
+		List mockList = mock(List.class);
 		 
 		//expectation
-		expect(mockList.get(0)).andThrow(new RuntimeException());
-		
-		//replay mode
-		//possible replayAll()
-		replay(mockList);
+		when(mockList.get(0)).thenThrow(new RuntimeException());
+	
+		//business test
 		mockList.get(0);
 
 	}

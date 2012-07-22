@@ -6,6 +6,7 @@
   <packaging>pom</packaging>
   <modules>
   	<module>easymock</module>
+  	<module>mockito</module>
   </modules>
   <dependencyManagement>
   	<dependencies>
