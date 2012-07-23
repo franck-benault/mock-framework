@@ -11,6 +11,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import static org.easymock.EasyMock.expect;
+import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.createNiceMock;
 import static org.easymock.EasyMock.replay;
 import static org.easymock.EasyMock.verify;
@@ -57,6 +58,31 @@ public class MainFeaturesTestCase {
 		//possible verifyAll();
 		verify(mockList);
 	}
+
+	/*
+	 * feature1bis of mock framework
+	 * call a method returning void
+	 */
+	@Test
+	public void feature1b_returninValueVoidTest() {
+		//create mock
+		@SuppressWarnings("rawtypes")
+		List mockList = createNiceMock(List.class);
+		 
+		//expectation
+		mockList.clear();
+		
+		//replay mode
+		//possible replayAll()
+		replay(mockList);
+		 
+		//business test
+		mockList.clear();
+
+		//verify
+		//possible verifyAll();
+		verify(mockList);
+	}
 	
 	/*
 	 * feature2 of mock framework
@@ -75,6 +101,27 @@ public class MainFeaturesTestCase {
 		//possible replayAll()
 		replay(mockList);
 		mockList.get(0);
+
+	}
+	
+	/*
+	 * feature2 bis of mock framework
+	 * throwing an exception
+	 */
+	@Test(expected=RuntimeException.class)
+	public void feature2bis_VoidReturnThrowingExceptionTest() {
+		//create mock
+		@SuppressWarnings("rawtypes")
+		List mockList = createNiceMock(List.class);
+		 
+		//expectation
+		mockList.clear();
+		expectLastCall().andThrow(new RuntimeException());
+		
+		//replay mode
+		//possible replayAll()
+		replay(mockList);
+		mockList.clear();
 
 	}
 
